@@ -90,6 +90,50 @@ export const constantRoutes = [
  * the routes that need to be dynamically loaded based on user roles
  */
 export const asyncRoutes = [
+  {
+    path: '/user',
+    component: Layout,
+    redirect: '/user/user',
+    meta: {
+      title: '用户管理',
+      icon: 'user'
+    },
+    children: [
+      {
+        path: 'user',
+        component: () => import('@/views/user/user'),
+        name: 'User',
+        meta: { title: '用户', icon: 'user' }
+      },
+      {
+        path: 'role',
+        component: () => import('@/views/user/role'),
+        name: 'Role',
+        meta: { title: '角色' }
+      },
+      {
+        path: 'permission',
+        component: () => import('@/views/user/permission'),
+        name: 'Permission',
+        meta: { title: '权限' }
+      }
+    ]
+  },
+
+  {
+    path: '/statistics/index',
+    component: Layout,
+    redirect: '/statistics',
+    children: [
+      {
+        path: 'statistics',
+        component: () => import('@/views/statistics/index'),
+        name: 'Statistics',
+        meta: { title: '首页', icon: 'statistics', affix: true }
+      }
+    ]
+  },
+
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
